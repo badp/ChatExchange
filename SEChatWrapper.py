@@ -11,8 +11,11 @@ class SEChatWrapper(object):
     self.br = SEChatBrowser.SEChatBrowser()
     self.site = site
     self.previous = None
+    self.logged_in = False
 
   def login(self, username, password):
+    assert not self.logged_in
+
     self.br.loginSEOpenID(username, password)
     if self.site == "SE":
       self.br.loginSECOM()
@@ -22,7 +25,18 @@ class SEChatWrapper(object):
     elif self.site == "MSO":
       self.br.loginMSO()
 
+    self.logged_in = True
+
+  def logout(self):
+    assert self.logged_in
+    self.logged_in = False
+    pass # There are no threads to stop
+
+  def __del__(self):
+    assert not self.logged_in, "You forgot to log out."
+
   def sendMessage(self, room, text):
+    assert self.logged_in
     sent = False
     if text == self.previous:
       text = " " + text

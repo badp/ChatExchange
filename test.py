@@ -27,3 +27,4 @@ print time.asctime(), response
 for i in range(10):
   response = a.sendMessage(LAZERS_TRAINING_GROUND, ":(")
   print time.asctime(), response
+a.logout()
