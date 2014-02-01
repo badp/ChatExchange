@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import SEChatWrapper
+from SEChatWrapperAsync import SEChatAsyncWrapper
 import getpass
 import os
 
@@ -18,13 +18,10 @@ else:
 LAZERS_TRAINING_GROUND = "12779"
 THE_BRIDGE = "35"
 
-import time
-a = SEChatWrapper.SEChatWrapper("SE")
+a = SEChatAsyncWrapper("SE")
 a.login(username, password)
-response = a.sendMessage(LAZERS_TRAINING_GROUND,
-                         "Please do not adjust your receiver.")
-print time.asctime(), response
+a.sendMessage(LAZERS_TRAINING_GROUND,
+              "Please do not adjust your receiver.")
 for i in range(10):
-  response = a.sendMessage(LAZERS_TRAINING_GROUND, ":(")
-  print time.asctime(), response
+  a.sendMessage(LAZERS_TRAINING_GROUND, ":(")
 a.logout()
