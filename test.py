@@ -3,6 +3,7 @@
 from SEChatWrapperAsync import SEChatAsyncWrapper
 import getpass
 import os
+import time
 
 #Run `. setp.sh` to set the below testing environment variables
 if "ChatExchangeU" in os.environ:
@@ -23,5 +24,6 @@ a.login(username, password)
 a.sendMessage(LAZERS_TRAINING_GROUND,
               "Please do not adjust your receiver.")
 for i in range(10):
-  a.sendMessage(LAZERS_TRAINING_GROUND, ":(")
+  a.sendMessage(LAZERS_TRAINING_GROUND, ":( combo x%d" % (i + 1))
+time.sleep(5) # Give the worker a chance to start.
 a.logout()
